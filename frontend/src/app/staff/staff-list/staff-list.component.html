@@ -1,0 +1,7 @@
+<app-staff-search-bar></app-staff-search-bar>
+<div *ngIf="staff$ | async as staff" class="mainDiv">
+    <div *ngFor="let s of staff" class="card">
+        <app-staff-display [staff]="s[1]" (deleteRequest)="deleteStaff($event)"></app-staff-display>
+    </div>
+</div>
+<app-background-picture [src]="'assets/profile1.jpg'"></app-background-picture>

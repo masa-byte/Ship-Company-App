@@ -1,0 +1,68 @@
+<div class="search-filter-container">
+    <mat-form-field appearance="fill">
+        <mat-label>Search</mat-label>
+        <input matInput [(ngModel)]="searchText" [formControl]="searchControl" placeholder="Search" />
+        <button mat-button matSuffix (click)="search()">
+            <mat-icon>search</mat-icon>
+        </button>
+        <button mat-button matPrefix [matMenuTriggerFor]="filterMenu">
+            <mat-icon>filter_list</mat-icon>
+            Filters
+        </button>
+    </mat-form-field>
+
+    <mat-menu #filterMenu="matMenu">
+        <div class="menu-group">
+            <h3>Sort by</h3>
+            <mat-radio-group [(ngModel)]="selectedParameter" aria-label="Select an option">
+                <mat-radio-button (click)="$event.stopPropagation()" value="salary">
+                    Salary
+                </mat-radio-button>
+                <mat-radio-button (click)="$event.stopPropagation()" value="yearsOfExperience">
+                    Years Of Experience
+                </mat-radio-button>
+                <mat-radio-button (click)="$event.stopPropagation()" value="noCriteria">
+                    No criteria
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="menu-group">
+            <h3>Order</h3>
+            <mat-radio-group [(ngModel)]="selectedOrder" aria-label="Select an option">
+                <mat-radio-button (click)="$event.stopPropagation()" value="asc">
+                    Ascending
+                </mat-radio-button>
+                <mat-radio-button (click)="$event.stopPropagation()" value="desc">
+                    Descending
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="menu-group">
+            <h3>Job title</h3>
+            <mat-checkbox [(ngModel)]="filters['instructor']" (click)="$event.stopPropagation()">
+                Instructor
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="filters['chef']" (click)="$event.stopPropagation()">
+                Chef
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="filters['entertainer']" (click)="$event.stopPropagation()">
+                Entertainer
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="filters['security']" (click)="$event.stopPropagation()">
+                Security
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="filters['captain']" (click)="$event.stopPropagation()">
+                Captain
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="filters['staff']" (click)="$event.stopPropagation()">
+                Staff
+            </mat-checkbox>
+        </div>
+        <mat-divider></mat-divider>
+        <button class="applyFilters" mat-button (click)="search()">
+            Apply Filters
+        </button>
+    </mat-menu>
+</div>

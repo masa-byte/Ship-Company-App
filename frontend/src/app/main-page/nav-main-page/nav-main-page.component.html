@@ -1,0 +1,71 @@
+<mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [mode]="'side'">
+        <mat-toolbar>Menu</mat-toolbar>
+        <div class="menu">
+            <div class="menu-items">
+                <mat-nav-list>
+                    <a mat-list-item routerLink="/mainPage/listItems">Main Page</a>
+                    <a mat-list-item routerLink="/cruise/cruiseList/null">Cruises</a>
+                    <a mat-list-item *ngIf="(userType$ | async)! == 'user'"
+                        routerLink="/rentings/rentingList">My
+                        Reservations</a>
+                    <a mat-list-item *ngIf="(userType$ | async)! == 'admin'" routerLink="/staff/staffList">Staff</a>
+                </mat-nav-list>
+            </div>
+            <div class="profile-actions">
+                <mat-nav-list>
+                    <a mat-list-item (click)="openProfile()">Profile</a>
+                    <a mat-list-item (click)="signOut()">Sign out</a>
+                </mat-nav-list>
+            </div>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <div class="left-group">
+                <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                </button>
+                <span style="cursor: pointer" (click)="openMainPage()">
+                    Sail Away
+                </span>
+            </div>
+            <div class="right-group">
+                <button mat-raised-button class="customButton" *ngIf="(userType$ | async)! == 'company'"
+                    (click)="openCruiseForm()">
+                    + Add new cruise
+                </button>
+                <button mat-raised-button class="customButton" *ngIf="(userType$ | async)! == 'company'"
+                    [matMenuTriggerFor]="menuItem">
+                    + Add new item
+                </button>
+                <mat-menu #menuItem="matMenu" class="customMenu">
+                    <button mat-menu-item class="customButton" (click)="openJetSkiForm()">Add a jet ski</button>
+                    <button mat-menu-item class="customButton" (click)="openBoatForm()"> Add a boat </button>
+                    <button mat-menu-item class="customButton" (click)="openCruiseShipForm()"> Add a cruise
+                        ship</button>
+                </mat-menu>
+                <button mat-raised-button class="customButton" *ngIf="(userType$ | async)! == 'admin'"
+                    (click)="addNewEmployee()">
+                    + Add new employee
+                </button>
+                <button mat-raised-button class="customButton" *ngIf="(userType$ | async)! == 'admin'"
+                    (click)="addNewCompany()">
+                    + Add new company
+                </button>
+                <button mat-raised-button class="customButton" *ngIf="(userType$ | async)! == 'user'"
+                    (click)="openMyRentings()">
+                    My reservations
+                </button>
+                <button type="button" aria-label="Navigate to profile" mat-icon-button [matMenuTriggerFor]="profile">
+                    <mat-icon aria-label="Profile icon">account_circle</mat-icon>
+                </button>
+                <mat-menu #profile="matMenu">
+                    <button mat-menu-item class="customButton" (click)="openProfile()">Profile</button>
+                    <button mat-menu-item class="customButton" (click)="signOut()">Sign out</button>
+                </mat-menu>
+            </div>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

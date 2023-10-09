@@ -1,0 +1,59 @@
+<mat-card class="card">
+    <mat-card-header>
+        <div mat-card-avatar class="icon"></div>
+        <mat-card-title class="cursor-pointer">
+            Reservation
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{ reservation!.cruise!.type | uppercase }} CRUISE
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-divider></mat-divider>
+        <div class="row">
+            <span class="label">Cruise name:</span>
+            <span class="text">{{ reservation!.cruise!.name }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Ship name:</span>
+            <span class="text">{{ reservation!.cruise!.cruiseShip!.name }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Room type:</span>
+            <span class="text">{{ reservation!.suite!.type }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Start date:</span>
+            <span class="text">{{ reservation!.cruise!.startDate | date:'dd-MM-yyyy' }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">End date:</span>
+            <span class="text">{{ reservation!.cruise!.endDate | date:'dd-MM-yyyy' }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Cost:</span>
+            <span class="text">{{ reservation!.cost }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Rated:</span>
+            <span class="text">{{ reservation!.isRated }}</span>
+        </div>
+        <mat-divider></mat-divider>
+    </mat-card-content>
+    <mat-card-actions>
+        <section class="section">
+            <button mat-icon-button color="basic" (click)="rateReservation()">
+                <mat-icon>thumb_up_alt</mat-icon>
+            </button>
+            <button mat-icon-button color="basic" (click)="deleteReservation()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </section>
+    </mat-card-actions>
+</mat-card>

@@ -1,0 +1,97 @@
+.card {
+    max-width: 100%;
+    min-width: fit-content;
+    margin: 8px;
+    background-color: #E1D89F;
+    font-weight: bold;
+    
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.5px;
+}
+
+.label {
+    text-align: left;
+    font-weight: bold;
+    margin-right: 10px;
+    font-style: italic;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+    letter-spacing: 0.5px;
+    width: auto;
+}
+
+.text {
+    text-align: right;
+    width: auto;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    font-size: larger;
+    margin-bottom: 5px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+mat-divider {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    background-color: black;
+}
+
+mat-card-actions {
+    display: flex;
+    text-align: end;
+    justify-content: space-between;
+}
+
+.section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.instructor-icon {
+    background-image: url("../../../assets/instructor.png");
+    background-size: contain;
+}
+
+.entertainer-icon {
+    background-image: url("../../../assets/theater.png");
+    background-size: contain;
+}
+
+.security-icon {
+    background-image: url("../../../assets/security.png");
+    background-size: contain;
+}
+
+.captain-icon {
+    background-image: url("../../../assets/captainHat.png");
+    background-size: contain;
+}
+
+.staff-icon {
+    background-image: url("../../../assets/staff.png");
+    background-size: contain;
+}
+
+.chef-icon {
+    background-image: url("../../../assets/chef.png");
+    background-size: contain;
+}
+
+span {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+::ng-deep {
+    .mat-mdc-card {
+        --mat-card-title-text-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        --mat-card-title-text-weight: 800;
+        --mat-card-subtitle-text-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        --mat-card-subtitle-text-weight: 600;
+    }
+}

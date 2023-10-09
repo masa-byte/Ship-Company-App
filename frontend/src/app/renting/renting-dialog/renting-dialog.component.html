@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Renting</h2>
+<div mat-dialog-content>
+    <form [formGroup]="rentForm">
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Price per day</mat-label>
+            <input matInput formControlName="pricePerDay"/>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="field">
+            <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" formControlName="startDate"
+                required>
+            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="field">
+            <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" formControlName="endDate" required>
+            <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #endDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <p *ngIf="rentForm.hasError('dateRangeInvalid')">End date must be after start date.</p>
+
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Calculated price</mat-label>
+            <input matInput formControlName="calculatedPrice"/>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="customBtn" (click)="onCancel()">Cancel</button>
+    <button mat-button class="customBtn" (click)="onConfirm()">Confirm</button>
+</div>

@@ -1,0 +1,54 @@
+<mat-card class="card">
+    <mat-card-header>
+        <div mat-card-avatar class="icon"></div>
+        <mat-card-title class="cursor-pointer">
+            {{ jetSki!.model }}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{ jetSki!.color | uppercase }}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-divider></mat-divider>
+        <div class="row">
+            <span class="label">Model:</span>
+            <span class="text">{{ jetSki!.model }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Color:</span>
+            <span class="text">{{ jetSki!.color }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Maximum speed:</span>
+            <span class="text">{{ jetSki!.maxSpeed }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Price per day:</span>
+            <span class="text">{{ jetSki!.pricePerDay }}e</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Rating:</span>
+            <span class="text">{{ jetSki!.rating }}</span>
+        </div>
+        <mat-divider></mat-divider>
+    </mat-card-content>
+    <mat-card-actions>
+        <section class="section1" *ngIf="(user$ | async)!.type === 'company'">
+            <button mat-icon-button color="basic" (click)="deleteJetSki()">
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="basic" (click)="editJetSki()">
+                <mat-icon>create</mat-icon>
+            </button>
+        </section>
+        <section class="section2" *ngIf="(user$ | async)!.type === 'user'">
+            <button mat-icon-button color="basic" (click)="rentJetSki()">
+                <mat-icon>event_available</mat-icon>
+            </button>
+        </section>
+    </mat-card-actions>
+</mat-card>

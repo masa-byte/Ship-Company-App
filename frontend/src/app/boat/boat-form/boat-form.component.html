@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="main-div">
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Name</mat-label>
+            <input [(ngModel)]="boat.name" required="true" #nameInput="ngModel" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Year Built</mat-label>
+            <input [(ngModel)]="boat.yearBuilt" required="true" #yearBuiltInput="ngModel" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Price per day</mat-label>
+            <input [(ngModel)]="boat.pricePerDay" required="true" #priceInput="ngModel" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Capacity</mat-label>
+            <mat-select [(ngModel)]="boat.capacity" required="true" #capacityInput="ngModel">
+                <mat-option *ngFor="let capacity of capacities" [value]="capacity"> {{capacity}} </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Type</mat-label>
+            <mat-select [(ngModel)]="boat.type" required="true" #typeInput="ngModel">
+                <mat-option *ngFor="let type of types" [value]="type"> {{type}} </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="button-container">
+            <button mat-raised-button class="btn" (click)="back()">Back</button>
+            <button mat-raised-button class="btn" (click)="action()"
+                [disabled]="!nameInput.valid ||  !yearBuiltInput.valid || !priceInput.valid || !capacityInput.valid || !typeInput.valid">
+                {{ isEditing ? "Save Changes" : "Add Boat" }}
+            </button>
+        </div>
+    </div>
+</div>
+<app-background-picture [src]="'assets/profile2.jpg'"></app-background-picture>

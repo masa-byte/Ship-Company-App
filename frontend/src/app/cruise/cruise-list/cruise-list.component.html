@@ -1,0 +1,7 @@
+<app-cruise-search-bar [cruiseShipName]="cruiseShipName"></app-cruise-search-bar>
+<div *ngIf="(cruises$ | async)" class="mainDiv">
+    <div *ngFor="let cruise of cruises$ | async" class="card">
+        <app-cruise-display [cruise]="cruise[1]" (cruiseDeleteRequest)="deleteCruise($event)" (cruiseReservationRequest)="makeReservation($event)"></app-cruise-display>
+    </div>
+</div>
+<app-background-picture [src]="'assets/boat2.jpg'"></app-background-picture>

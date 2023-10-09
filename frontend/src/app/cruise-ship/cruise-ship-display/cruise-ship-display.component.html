@@ -1,0 +1,74 @@
+<mat-card class="card">
+    <mat-card-header>
+        <div mat-card-avatar class="icon"></div>
+        <mat-card-title class="cursor-pointer">
+            {{ cruiseShip!.name }}
+        </mat-card-title>
+        <mat-card-subtitle>
+            YACHT
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-divider></mat-divider>
+        <div class="row">
+            <span class="label">Name:</span>
+            <span class="text">{{ cruiseShip!.name }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Year built:</span>
+            <span class="text">{{ cruiseShip!.yearBuilt }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Restaurants:</span>
+            <span class="text">{{ cruiseShip!.restaurants }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Bars:</span>
+            <span class="text">{{ cruiseShip!.bars }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Pools:</span>
+            <span class="text">{{ cruiseShip!.pools }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Theaters:</span>
+            <span class="text">{{ cruiseShip!.theaters }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Gyms:</span>
+            <span class="text">{{ cruiseShip!.gyms }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Rating:</span>
+            <span class="text">{{ cruiseShip!.rating }}</span>
+        </div>
+        <mat-divider></mat-divider>
+    </mat-card-content>
+    <mat-card-actions>
+        <section class="section1" *ngIf="(user$ | async)!.type === 'company'">
+            <button mat-icon-button color="basic" (click)="deleteCruiseShip()">
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="basic" (click)="editCruiseShip()">
+                <mat-icon>create</mat-icon>
+            </button>
+        </section>
+        <section class="section2" *ngIf="(user$ | async)!.type === 'admin'">
+            <button mat-icon-button color="basic" (click)="checkAvailableCruises()">
+                <mat-icon>event_available</mat-icon>
+            </button>
+        </section>
+        <section class="section2" *ngIf="(user$ | async)!.type === 'user'">
+            <button mat-icon-button color="basic" (click)="checkAvailableCruises()">
+                <mat-icon>event_available</mat-icon>
+            </button>
+        </section>
+    </mat-card-actions>
+</mat-card>

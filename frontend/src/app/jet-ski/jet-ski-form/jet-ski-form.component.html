@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="main-div">
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Model</mat-label>
+            <input [(ngModel)]="jetSki.model" required="true" #modelInput="ngModel" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Maximum Speed</mat-label>
+            <input [(ngModel)]="jetSki.maxSpeed" required="true" #maxSpeedInput="ngModel" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Price per day</mat-label>
+            <input [(ngModel)]="jetSki.pricePerDay" required="true" #priceInput="ngModel" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Color</mat-label>
+            <mat-select [(ngModel)]="jetSki.color" required="true" #colorInput="ngModel">
+                <mat-option *ngFor="let color of colors" [value]="color"> {{color}} </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="button-container">
+            <button mat-raised-button class="btn" (click)="back()">Back</button>
+            <button mat-raised-button class="btn" (click)="action()"
+                [disabled]="!modelInput.valid ||  !maxSpeedInput.valid || !priceInput.valid || !colorInput.valid">
+                {{ isEditing ? "Save Changes" : "Add Jet Ski" }}
+            </button>
+        </div>
+    </div>
+</div>
+<app-background-picture [src]="'assets/profile2.jpg'"></app-background-picture>

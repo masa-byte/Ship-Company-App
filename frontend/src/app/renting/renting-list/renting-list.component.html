@@ -1,0 +1,11 @@
+<div *ngIf="(rentings$ | async) || (reservations$ | async)" class="mainDiv">
+    <div *ngFor="let r of rentings$ | async" class="card">
+        <app-renting-display [renting]="r[1]" (deleteRequest)="deleteRenting($event)"
+            (rateRequest)="rateRenting($event)"></app-renting-display>
+    </div>
+    <div *ngFor="let r of reservations$ | async" class="card">
+        <app-reservation-display [reservation]="r[1]" (deleteRequest)="deleteReservation($event)"
+            (rateRequest)="rateReservation($event)"></app-reservation-display>
+    </div>
+</div>
+<app-background-picture [src]="'assets/profile1.jpg'"></app-background-picture>

@@ -1,0 +1,182 @@
+<div class="container">
+    <div class="main-div">
+        <mat-stepper orientation="vertical" [linear]="true" #stepper>
+            <mat-step [stepControl]="cruiseFormGroup">
+                <ng-template matStepLabel> Cruise info </ng-template>
+                <form [formGroup]="cruiseFormGroup">
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="name" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date"
+                            formControlName="startDate">
+                        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #startDatePicker></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <input matInput [matDatepicker]="endDatePicker" placeholder="End Date"
+                            formControlName="endDate">
+                        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #endDatePicker></mat-datepicker>
+                    </mat-form-field>
+
+                    <p *ngIf="cruiseFormGroup.hasError('dateRangeInvalid')">End date must be after start date.</p>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Trip Type</mat-label>
+                        <mat-select formControlName="type">
+                            <mat-option value="party"> Party Trip </mat-option>
+                            <mat-option value="romantic"> Romantic Trip </mat-option>
+                            <mat-option value="luxury"> Luxury Trip </mat-option>
+                            <mat-option value="nye"> New Year Trip </mat-option>
+                            <mat-option value="family"> Family Trip </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <div>
+                        <button mat-button class="btn" type="button" matStepperNext
+                            [disabled]="cruiseFormGroup.invalid">
+                            Next
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <mat-step [stepControl]="destinationFormGroup">
+                <form [formGroup]="destinationFormGroup">
+                    <ng-template matStepLabel> Add Destinations </ng-template>
+                    <div formArrayName="destinations">
+                        <div *ngFor="let dest of destinations.controls; let i = index">
+                            <div [formGroupName]="i">
+                                <h3 style="margin-top: 10px">Destination {{ i + 1 }}</h3>
+
+                                <mat-form-field appearance="fill" class="field">
+                                    <mat-label>Destination</mat-label>
+                                    <mat-select formControlName="city">
+                                        <mat-option *ngFor="let dest of destinationsArr" [value]="dest.city">
+                                            {{dest.city}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <div>
+                                    <button mat-button class="btn" (click)="removeDestination(i)">
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-button">
+                            <div class="center-container">
+                                <button mat-icon-button type="button" color="basic" (click)="addDestination()">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button mat-button class="btn" type="button" matStepperPrevious>
+                            Back
+                        </button>
+                        <button mat-button class="btn" type="button" matStepperNext>
+                            Next
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <mat-step [stepControl]="cruiseShipFormGroup">
+                <ng-template matStepLabel> Cruise Ship Selection </ng-template>
+                <form [formGroup]="cruiseShipFormGroup">
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Name</mat-label>
+                        <mat-select formControlName="name">
+                            <mat-option *ngFor="let ship of cruiseShipsArr" [value]="ship.name"> {{ship.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <div class="button-container">
+                        <button mat-button class="btn" type="button" matStepperPrevious>
+                            Back
+                        </button>
+                        <button mat-button class="btn" type="button" matStepperNext>
+                            Next
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <mat-step [stepControl]="staffFormGroup">
+                <ng-template matStepLabel> Staff Selection </ng-template>
+                <form [formGroup]="staffFormGroup">
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label> Captain </mat-label>
+                        <mat-select formControlName="captain">
+                            <mat-option *ngFor="let captain of captainsArr" [value]="captain.id"> {{captain.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <div formArrayName="staff">
+                        <div *ngFor="let stf of staff.controls; let i = index">
+                            <div [formGroupName]="i">
+                                <h3 style="margin-top: 10px">Staff Member {{ i + 1 }}</h3>
+
+                                <mat-form-field appearance="fill" class="field">
+                                    <mat-label>Name and Job</mat-label>
+                                    <mat-select formControlName="staffId">
+                                        <mat-option *ngFor="let stf of staffArr" [value]="stf.id">
+                                            {{stf.name}} - {{stf.jobTitle}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <div>
+                                    <button mat-button class="btn" (click)="removeStaff(i)">
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-button">
+                            <div class="center-container">
+                                <button mat-icon-button type="button" color="basic" (click)="addStaff()">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="button-container">
+                        <button mat-button class="btn" type="button" matStepperPrevious>
+                            Back
+                        </button>
+                        <button mat-button class="btn" type="button" matStepperNext>
+                            Next
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                <div style="margin: 30px">
+                    <h2>This cruise is ready!</h2>
+                    <div class="button-container">
+                        <button mat-button class="btn" type="button" matStepperPrevious>
+                            Back
+                        </button>
+                        <button mat-raised-button class="btn" type="submit" (click)="action()">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </mat-step>
+        </mat-stepper>
+    </div>
+</div>
+<app-background-picture [src]="'assets/boat1.jpg'"></app-background-picture>

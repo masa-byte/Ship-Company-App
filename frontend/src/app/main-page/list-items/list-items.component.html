@@ -1,0 +1,13 @@
+<app-search-bar></app-search-bar>
+<div *ngIf="(boats$ | async) || (jetSkies$ | async) || (cruiseShips$ | async)" class="mainDiv">
+    <div *ngFor="let boat of boats$ | async" class="card">
+        <app-boat-display [boat]="boat[1]" (boatDeleteRequest)="deleteBoat($event)" (boatRentRequest)="rent($event)"></app-boat-display>
+    </div>
+    <div *ngFor="let jet of jetSkies$ | async" class="card">
+        <app-jet-ski-display [jetSki]="jet[1]" (jetSkiDeleteRequest)="deleteJetSki($event)" (jetSkiRentRequest)="rent($event)"></app-jet-ski-display>
+    </div>
+    <div *ngFor="let cruiseShip of cruiseShips$ | async" class="card">
+        <app-cruise-ship-display [cruiseShip]="cruiseShip[1]" (cruiseShipDeleteRequest)="deleteCruiseShip($event)"></app-cruise-ship-display>
+    </div>
+</div>
+<app-background-picture [src]="'assets/boat2.jpg'"></app-background-picture>

@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="main-div">
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Name</mat-label>
+            <input [(ngModel)]="staff.name" required="true" #nameInput="ngModel" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Surname</mat-label>
+            <input [(ngModel)]="staff.surname" required="true" #surnameInput="ngModel" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Address</mat-label>
+            <input [(ngModel)]="staff.address" required="true" #addressInput="ngModel" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field" *ngIf="!isEditing">
+            <mat-label>Birth date</mat-label>
+            <input matInput type="date" [(ngModel)]="staff.birthDate" required="true"
+                #birthDateInput="ngModel" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" [(ngModel)]="staff.email" required="true" #emailInput="ngModel" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Salary</mat-label>
+            <input [(ngModel)]="staff.salary" required="true" #salaryInput="ngModel" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Years of experience</mat-label>
+            <input [(ngModel)]="staff.yearsOfExperience" required="true" #experienceInput="ngModel" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Job title</mat-label>
+            <mat-select [(ngModel)]="staff.jobTitle" required="true" #titleInput="ngModel">
+                <mat-option value="instructor">Instructor</mat-option>
+                <mat-option value="chef">Chef</mat-option>
+                <mat-option value="entertainer">Entertainer</mat-option>
+                <mat-option value="security">Security</mat-option>
+                <mat-option value="captain">Captain</mat-option>
+                <mat-option value="staff">Staff</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="button-container">
+            <button mat-raised-button class="btn" (click)="back()">Back</button>
+            <button mat-raised-button class="btn" (click)="action()" [disabled]="
+          !nameInput.valid || !surnameInput.valid || !addressInput.valid ||
+          !emailInput.valid || !salaryInput.valid || !titleInput.valid ||
+          !experienceInput.valid"> {{ isEditing ? "Save Changes" : "Add Staff" }}
+            </button>
+        </div>
+    </div>
+</div>
+<app-background-picture [src]="'assets/profile2.jpg'"></app-background-picture>

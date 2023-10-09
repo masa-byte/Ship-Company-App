@@ -1,0 +1,152 @@
+<div class="container">
+    <div class="main-div">
+        <mat-stepper orientation="vertical" [linear]="true" #stepper>
+            <mat-step [stepControl]="cruiseShipFormGroup">
+                <ng-template matStepLabel> Cruise Ship info </ng-template>
+                <form [formGroup]="cruiseShipFormGroup">
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="name" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Year Built</mat-label>
+                        <input matInput type="number" formControlName="yearBuilt" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Restaurants</mat-label>
+                        <mat-select formControlName="restaurants">
+                            <mat-option *ngFor="let rest of restsNum" [value]="rest"> {{rest}} </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Pools</mat-label>
+                        <mat-select formControlName="pools">
+                            <mat-option *ngFor="let pool of poolsNum" [value]="pool"> {{pool}} </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Bars</mat-label>
+                        <mat-select formControlName="bars">
+                            <mat-option *ngFor="let bar of barsNum" [value]="bar"> {{bar}} </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Gyms</mat-label>
+                        <mat-select formControlName="gyms">
+                            <mat-option *ngFor="let gym of gymsNum" [value]="gym"> {{gym}} </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Theaters</mat-label>
+                        <mat-select formControlName="theaters">
+                            <mat-option *ngFor="let theater of theatersNum" [value]="theater"> {{theater}} </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div>
+                        <button mat-button class="btn" type="button" matStepperNext [disabled]="cruiseShipFormGroup.invalid">
+                            Next
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <mat-step [stepControl]="suitesFormGroup">
+                <form [formGroup]="suitesFormGroup">
+                    <ng-template matStepLabel> Add suites </ng-template>
+                    <div formArrayName="suites">
+                        <div *ngFor="let suite of suites.controls; let i = index">
+                            <div [formGroupName]="i">
+                                <h3 style="margin-top: 10px">Room {{ i + 1 }}</h3>
+
+                                <mat-form-field appearance="fill" class="field" *ngIf="isEditing">
+                                    <mat-label>Id</mat-label>
+                                    <input matInput formControlName="id" />
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill" class="field">
+                                    <mat-label>Type</mat-label>
+                                    <mat-select formControlName="type">
+                                        <mat-option *ngFor="let type of suiteTypes" [value]="type"> {{type}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill" class="field">
+                                    <mat-label>Price per night</mat-label>
+                                    <input matInput type="number" formControlName="pricePerNight" />
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill" class="field">
+                                    <mat-label>Single beds</mat-label>
+                                    <mat-select formControlName="singleBeds">
+                                        <mat-option *ngFor="let bed of singleBedsNum" [value]="bed"> {{bed}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill" class="field">
+                                    <mat-label>Double beds</mat-label>
+                                    <mat-select formControlName="doubleBeds">
+                                        <mat-option *ngFor="let bed of doubleBedsNum" [value]="bed"> {{bed}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill" class="field">
+                                    <mat-label>Bathrooms</mat-label>
+                                    <mat-select formControlName="bathrooms">
+                                        <mat-option *ngFor="let bath of bathroomsNum" [value]="bath"> {{bath}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <div>
+                                    <button mat-button class="btn" (click)="removeSuite(i)">
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-button">
+                            <div class="center-container">
+                                <button mat-icon-button type="button" color="basic" (click)="addSuite()">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button mat-button class="btn" type="button" matStepperPrevious>
+                            Back
+                        </button>
+                        <button mat-button class="btn" type="button" matStepperNext [disabled]="suitesFormGroup.invalid">
+                            Next
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                <div style="margin: 30px">
+                    <h2>This cruise ship is ready to set sail!</h2>
+                    <div class="button-container">
+                        <button mat-button class="btn" type="button" matStepperPrevious>
+                            Back
+                        </button>
+                        <button mat-raised-button class="btn" type="submit" (click)="action()">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </mat-step>
+        </mat-stepper>
+    </div>
+</div>
+<app-background-picture [src]="'assets/profile2.jpg'"></app-background-picture>
