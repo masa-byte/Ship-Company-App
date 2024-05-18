@@ -16,7 +16,7 @@ The main target audience is **ship companies**.
 <br>
 
 ### Tech stack
-It was written in **Angular** and **NestJS**, and uses **Postgres** as the database.
+It was written in **Angular** and **NestJS**, and uses **PostgreSQL** as the database.
 <br>
 <br>
 
